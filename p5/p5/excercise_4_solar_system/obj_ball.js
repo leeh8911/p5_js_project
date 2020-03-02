@@ -1,6 +1,8 @@
 
         var gravity_acc = 1;
         var density = 30;
+
+
 class Ball{
     constructor(_x, _y, _vx, _vy)
     {
@@ -23,9 +25,10 @@ class Ball{
         this.ax = 0;
         this.ay = 0;
     }
+
     action(other)
     {
-        var gravityConstant = pow(10,-4);
+        var gravityConstant = pow(10,-6);
         var distance = sqrt(pow((this.x - other.x),2) + pow((this.y - other.y),2))/100;
         var gravityForce = (this.mass * other.mass)/pow(distance,2);
 
@@ -59,5 +62,17 @@ class Ball{
     {
         fill(255);
         ellipse(this.x, this.y, this.mass*density, this.mass*density);
+    }
+
+    originateThisBall(balls)
+    {
+        var xOrigin = this.x - width/2;
+        var yOrigin = this.y - height/2;
+
+        for(let i = 0; i < balls.length; i++)
+        {
+            balls[i].x -= xOrigin;
+            balls[i].y -= yOrigin;
+        }
     }
 }
